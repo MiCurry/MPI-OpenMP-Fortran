@@ -103,7 +103,7 @@ contains
 
         integer, intent(in) :: rank
         integer, intent(in) :: comm_size
-        real, intent(in), dimension(:), allocatable :: array
+        real, intent(inout), dimension(:), allocatable :: array
         real, intent(out), dimension(:), pointer :: my_array
 
         integer, dimension(:), allocatable :: send_counts
@@ -148,11 +148,14 @@ contains
         integer :: i, j
 
         ! Perform some slow operation (n^2)
+
+        !$OMP DO
         do i = 1, size(array), 1
            do j = 1, size(array), 1
             array(i) = array(i) + sqrt(array(i)) + sqrt(array(j))
            end do
         end do
+        !$OMP END DO
 
     end subroutine do_work
 

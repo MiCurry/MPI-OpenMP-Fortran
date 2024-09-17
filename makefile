@@ -1,7 +1,10 @@
-FLAGS = -g -fbacktrace -fbounds-check -std=f2003 -Wall -Wunused-dummy-argument
+FLAGS = -fbacktrace -fbounds-check -std=f2003 -Wall -Wunused-dummy-argument
 
-all: cspeed.o
-	mpifort $(FLAGS) -o fortran_mpi_example fortran_mpi.F90 cspeed.o
+mpi: cspeed.o
+	mpifort $(FLAGS) -o fortran_mpi fortran_mpi.F90 cspeed.o
+
+hybrid: cspeed.o
+	mpifort -fopenmp $(FLAGS) -o fortran_hybrid fortran_mpi.F90 cspeed.o
 
 cspeed: cspeed.c
 	mpicc $(FLAGS) -c cspeed.c

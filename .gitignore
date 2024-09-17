@@ -1,3 +1,4 @@
 *.o
-fortran_mpi_example
+fortran_mpi
+fortran_hybrid
 *.swp
