@@ -1,0 +1,3 @@
+*.o
+fortran_mpi_example
+*.swp
